@@ -298,7 +298,7 @@ class Navigation {
 // ===== ANIMATIONS & VISUAL EFFECTS =====
 class Animations {
   constructor() {
-    this.animatedElements = document.querySelectorAll('.fade-in, .project-card, .tech-item, .timeline-item, .stat');
+    this.animatedElements = document.querySelectorAll('.fade-in, .project-card, .planet, .timeline-item, .stat');
     this.heroSubtitle = document.querySelector('.hero-subtitle');
     this.stats = document.querySelectorAll('.stat-number');
     
@@ -327,7 +327,7 @@ class Animations {
           
           // Add staggered delay for grid items
           if (entry.target.classList.contains('project-card') || 
-              entry.target.classList.contains('tech-item')) {
+              entry.target.classList.contains('planet')) {
             const delay = utils.randomDelay(0, 300);
             entry.target.style.transitionDelay = `${delay}ms`;
           }
@@ -677,15 +677,99 @@ class InteractiveElements {
   }
 
   setupTechStackInteractions() {
-    document.querySelectorAll('.tech-item').forEach(item => {
-      item.addEventListener('click', () => {
-        this.showTechDetails(item);
+    const planets = document.querySelectorAll('.planet');
+    const aiCenter = document.querySelector('.ai-center');
+    const orbits = document.querySelectorAll('.orbit');
+
+    // Ensure animations start properly
+    planets.forEach(planet => {
+      planet.style.animationPlayState = 'running';
+    });
+
+    orbits.forEach(orbit => {
+      orbit.style.animationPlayState = 'running';
+    });
+
+    // Planet hover interactions - works for both inner and outer orbits
+    planets.forEach(planet => {
+      planet.addEventListener('mouseenter', () => {
+        // Pause the parent orbit animation (works for both inner and outer)
+        const parentOrbit = planet.closest('.orbit');
+        if (parentOrbit) {
+          parentOrbit.style.animationPlayState = 'paused';
+        }
+      });
+
+      planet.addEventListener('mouseleave', () => {
+        // Resume the parent orbit animation (works for both inner and outer)
+        const parentOrbit = planet.closest('.orbit');
+        if (parentOrbit) {
+          parentOrbit.style.animationPlayState = 'running';
+        }
+      });
+
+      // Click to show tech details
+      planet.addEventListener('click', () => {
+        this.showTechDetails(planet);
       });
     });
+
+    // AI center hover interactions
+    if (aiCenter) {
+      aiCenter.addEventListener('mouseenter', () => {
+        // Pause all orbit animations and highlight all planets
+        orbits.forEach(orbit => {
+          orbit.style.animationPlayState = 'paused';
+        });
+        
+        planets.forEach(planet => {
+          planet.style.transform += ' scale(1.1)';
+        });
+      });
+
+      aiCenter.addEventListener('mouseleave', () => {
+        // Resume all orbit animations and reset planet scales
+        orbits.forEach(orbit => {
+          orbit.style.animationPlayState = 'running';
+        });
+        
+        planets.forEach(planet => {
+          planet.style.transform = planet.style.transform.replace(' scale(1.1)', '');
+        });
+      });
+    }
+
+    // Keep planet text upright during rotation
+    this.setupTextRotation();
   }
 
-  showTechDetails(item) {
-    const techName = item.querySelector('.tech-name').textContent;
+  setupTextRotation() {
+    const planets = document.querySelectorAll('.planet');
+    
+    // Function to update text rotation based on planet position
+    const updateTextRotation = () => {
+      planets.forEach(planet => {
+        const planetName = planet.querySelector('.planet-name');
+        if (planetName) {
+          // Get the current transform of the planet
+          const transform = getComputedStyle(planet).transform;
+          const matrix = new DOMMatrix(transform);
+          
+          // Calculate the angle from the transform matrix
+          const angle = Math.atan2(matrix.b, matrix.a) * (180 / Math.PI);
+          
+          // Keep text upright by counter-rotating
+          planetName.style.transform = `translateX(-50%) rotate(${-angle}deg)`;
+        }
+      });
+    };
+
+    // Update text rotation periodically during animation
+    setInterval(updateTextRotation, 100);
+  }
+
+  showTechDetails(planet) {
+    const techName = planet.getAttribute('data-tech') || planet.querySelector('.planet-name').textContent;
     
     // Create tooltip or modal (simple tooltip for now)
     const tooltip = document.createElement('div');
@@ -709,7 +793,7 @@ class InteractiveElements {
     document.body.appendChild(tooltip);
     
     // Position tooltip
-    const rect = item.getBoundingClientRect();
+    const rect = planet.getBoundingClientRect();
     tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
     tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10}px`;
     
