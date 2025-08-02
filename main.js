@@ -164,33 +164,18 @@ class Navigation {
   }
 
   handleHeaderVisibility(currentScrollY) {
-    // Keep Dynamic Island navbar fixed - no floating behavior
-    // Only enhance glass effect based on scroll position
-    this.handleHeaderBackground(currentScrollY);
+    // Keep navbar always visible - disable hide/show functionality
+    this.header.classList.remove('header-hidden');
+    this.isHeaderVisible = true;
   }
 
   handleHeaderBackground(currentScrollY) {
-    // Enhanced Dynamic Island glass effect based on scroll position
-    if (currentScrollY > 100) {
-      this.header.style.background = 'rgba(0, 0, 0, 0.85)';
-      this.header.style.backdropFilter = 'blur(40px) saturate(220%)';
-      this.header.style.borderColor = 'rgba(255, 255, 255, 0.35)';
-      this.header.style.boxShadow = '0 16px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.25)';
-    } else if (currentScrollY > 50) {
-      this.header.style.background = 'rgba(0, 0, 0, 0.8)';
-      this.header.style.backdropFilter = 'blur(35px) saturate(200%)';
-      this.header.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-      this.header.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
-    } else {
-      this.header.style.background = 'rgba(0, 0, 0, 0.75)';
-      this.header.style.backdropFilter = 'blur(35px) saturate(200%)';
-      this.header.style.borderColor = 'rgba(255, 255, 255, 0.25)';
-      this.header.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
-    }
+    // Keep header transparent and only style the nav-container
+    // No styling applied to header - let CSS handle it
   }
 
   updateActiveSection() {
-    const scrollPosition = window.pageYOffset + 100;
+    const scrollPosition = window.pageYOffset + 90; // Account for fixed navbar height
     
     this.sections.forEach(section => {
       const sectionTop = utils.getElementPosition(section).top;
@@ -207,7 +192,7 @@ class Navigation {
   }
 
   smoothScrollTo(targetElement) {
-    const targetPosition = utils.getElementPosition(targetElement).top - 80;
+    const targetPosition = utils.getElementPosition(targetElement).top - 90; // Account for fixed navbar height
     
     window.scrollTo({
       top: targetPosition,
@@ -254,7 +239,7 @@ class Navigation {
       visibility: hidden;
       transform: translateY(20px);
       transition: all 0.3s ease;
-      z-index: 1000;
+      z-index: 9998;
       box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
     `;
     
@@ -419,16 +404,16 @@ class Animations {
       });
     });
 
-    // Tech item hover effects
-    document.querySelectorAll('.tech-item').forEach(item => {
-      item.addEventListener('mouseenter', () => {
-        item.style.transform = 'translateY(-5px) scale(1.05)';
-        item.style.boxShadow = '0 8px 25px rgba(255, 255, 255, 0.3)';
+    // Tech badge hover effects
+    document.querySelectorAll('.tech-badge').forEach(badge => {
+      badge.addEventListener('mouseenter', () => {
+        badge.style.transform = 'translateY(-3px)';
+        badge.style.boxShadow = '0 6px 12px rgba(255, 255, 255, 0.15)';
       });
       
-      item.addEventListener('mouseleave', () => {
-        item.style.transform = 'translateY(0) scale(1)';
-        item.style.boxShadow = 'none';
+      badge.addEventListener('mouseleave', () => {
+        badge.style.transform = '';
+        badge.style.boxShadow = '';
       });
     });
   }

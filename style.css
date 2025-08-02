@@ -72,6 +72,12 @@ body {
   color: var(--color-text);
   background-color: var(--color-background);
   overflow-x: hidden;
+  padding-top: 120px; /* Adjusted for new header structure with margin */
+}
+
+/* Main content spacing */
+.main {
+  position: relative;
 }
 
 /* Reduce motion for users who prefer it */
@@ -197,178 +203,96 @@ a:hover {
   box-shadow: var(--shadow-lg);
 }
 
-/* ===== DYNAMIC ISLAND FLOATING NAVIGATION ===== */
+/* ===== NAVIGATION ===== */
 .header {
   position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 60px;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transform: translateX(-50%) translateY(0);
-  box-shadow: 
-    0 1px 24px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
-  max-width: 750px;
-  width: 95%;
-  padding: 0;
-  overflow: hidden;
-}
-
-.header::before {
-  content: '';
-  position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(255, 255, 255, 0.02) 100%
-  );
-  border-radius: 60px;
-  pointer-events: none;
-  z-index: -1;
+  z-index: 9999;
+  width: 100%;
+  /* Wrapper for centering only - NO background, blur, or styling */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 32px auto;
+  padding: 0;
+  background: none;
+  border: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .header.header-hidden {
-  transform: translateX(-50%) translateY(-120px);
+  transform: translateY(-100%);
   opacity: 0;
 }
 
-.header:hover {
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(25px) saturate(200%);
-  -webkit-backdrop-filter: blur(25px) saturate(200%);
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: 
-    0 4px 32px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
-  transform: translateX(-50%) translateY(-3px);
-}
-
-.header:hover::before {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0.08) 50%,
-    rgba(255, 255, 255, 0.03) 100%
-  );
+.nav,
+.nav-menu {
+  /* Transparent pass-through containers */
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .nav-container {
+  /* THIS IS THE PILL - ONLY element with glassmorphism */
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 16px 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 24px;
+  gap: 0;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
   margin: 0 auto;
-  gap: 16px;
-  width: 100%;
-  max-width: 600px;
-}
-
-.nav-logo {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--color-primary);
-  text-decoration: none;
-  white-space: nowrap;
-  padding: 10px 14px;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-  letter-spacing: 0.3px;
-}
-
-.nav-logo:hover {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(15px);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  width: fit-content;
+  max-width: fit-content;
+  min-height: 60px;
+  transition: all var(--transition-normal);
 }
 
 .nav-menu {
   display: flex;
   list-style: none;
-  gap: 10px;
+  gap: 0;
   align-items: center;
-  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-link {
   color: var(--color-text);
   text-decoration: none;
-  font-weight: 600;
-  font-size: 13px;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 14px 22px;
+  border-radius: 25px;
+  transition: all var(--transition-normal);
   position: relative;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  padding: 10px 14px;
-  border-radius: 20px;
   white-space: nowrap;
-  letter-spacing: 0.2px;
-  overflow: hidden;
-}
-
-.nav-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.04) 50%,
-    rgba(255, 255, 255, 0.02) 100%
-  );
-  border-radius: 20px;
-  opacity: 0;
-  transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  pointer-events: none;
 }
 
 .nav-link:hover {
+  color: var(--color-primary);
   background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 
-    0 2px 8px rgba(255, 255, 255, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
-  transform: translateY(-2px);
-}
-
-.nav-link:hover::before {
-  opacity: 1;
+  backdrop-filter: blur(10px);
+  transform: translateY(-1px);
 }
 
 .nav-link.active {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  color: var(--color-background);
+  background: var(--color-primary);
   box-shadow: 
-    0 4px 12px rgba(255, 255, 255, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
-  transform: translateY(-2px);
-  font-weight: 700;
-}
-
-.nav-link.active::before {
-  opacity: 1;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.06) 50%,
-    rgba(255, 255, 255, 0.03) 100%
-  );
+    0 4px 12px rgba(255, 255, 255, 0.2),
+    0 2px 4px rgba(255, 255, 255, 0.1);
 }
 
 .nav-toggle {
@@ -376,16 +300,13 @@ a:hover {
   flex-direction: column;
   cursor: pointer;
   gap: 4px;
-  padding: 8px;
-  border-radius: 20px;
-  transition: all 0.3s ease;
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius);
+  transition: all var(--transition-normal);
 }
 
 .nav-toggle:hover {
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(15px);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .hamburger {
@@ -393,7 +314,7 @@ a:hover {
   height: 2px;
   background: var(--color-text);
   border-radius: 1px;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 /* ===== HERO SECTION ===== */
@@ -401,7 +322,7 @@ a:hover {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 140px;
+  padding-top: 120px;
   position: relative;
   overflow: hidden;
 }
@@ -544,398 +465,229 @@ a:hover {
 
 /* ===== TECH STACK SECTION ===== */
 .tech-stack {
+  background: var(--color-background);
   position: relative;
-  overflow: hidden;
-  padding-top: var(--spacing-2xl);
-  margin-top: var(--spacing-2xl);
+  padding: var(--spacing-3xl) 0;
 }
 
-.tech-stack::before {
+.tech-stack .section-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+  color: var(--color-text);
+}
+
+.tech-stack .section-subtitle {
+  text-align: center;
+  color: var(--color-text-secondary);
+  margin-bottom: 3rem;
+  font-size: 1.3rem;
+  font-weight: 400;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tech-badges {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.2rem;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.tech-badge {
+  background: #1a1a1a;
+  color: var(--color-text);
+  padding: 10px 16px;
+  border-radius: 22px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  cursor: default;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-badge::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  pointer-events: none;
-  z-index: -1;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
 }
 
-/* ===== TECH CATEGORY HEADERS ===== */
-.tech-category-header {
-  text-align: center;
-  margin-bottom: var(--spacing-xl);
-  position: relative;
-  z-index: 10;
+.tech-badge:hover::before {
+  left: 100%;
 }
 
-.tech-category-header.outer-category {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.7;
-}
-
-.category-title {
-  color: var(--color-primary);
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  margin-bottom: var(--spacing-xs);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.category-description {
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
-  margin: 0;
-  opacity: 0.8;
-}
-
-/* ===== SOLAR SYSTEM CONTAINER ===== */
-.solar-system {
-  position: relative;
-  width: 600px;
-  height: 600px;
-  margin: var(--spacing-3xl) auto;
-  background: var(--color-background);
-}
-
-/* ===== AI CENTER (FIXED) ===== */
-.ai-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
-  text-align: center;
-}
-
-.ai-icon {
-  width: 100px;
-  height: 100px;
+.tech-badge:hover {
   background: var(--color-primary);
-  border: 2px solid var(--color-background);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: var(--color-background);
+  border-color: var(--color-primary);
+  transform: translateY(-6px) scale(1.02);
   box-shadow: 
-    0 0 20px rgba(255, 255, 255, 0.3),
-    0 8px 32px rgba(0, 0, 0, 0.3);
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  margin: 0 auto;
+    0 12px 30px rgba(255, 255, 255, 0.25),
+    0 6px 16px rgba(255, 255, 255, 0.15);
 }
 
-.ai-icon svg {
-  width: 50px;
-  height: 50px;
+/* ===== RESPONSIVE DESIGN FOR NAVIGATION ===== */
+@media (max-width: 768px) {
+  body {
+    padding-top: 100px; /* Adjusted for new header structure */
+  }
+  
+  .header {
+    /* Wrapper only - no padding needed */
+    margin: 20px auto;
+  }
+  
+  .nav-container {
+    border-radius: 40px;
+    padding: 12px 18px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    min-height: 50px;
+    max-width: calc(100% - 20px);
+  }
+  
+  .nav-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .nav-menu {
+    gap: 8px;
+    min-width: max-content;
+  }
+  
+  .nav-link {
+    padding: 12px 18px;
+    font-size: 15px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+  
+  .nav-toggle {
+    display: none; /* Keep hidden since we're using horizontal scroll */
+  }
 }
 
-.ai-icon:hover {
-  transform: scale(1.05);
-  box-shadow: 
-    0 0 30px rgba(255, 255, 255, 0.4),
-    0 12px 40px rgba(0, 0, 0, 0.4);
+@media (max-width: 480px) {
+  body {
+    padding-top: 90px; /* Adjusted for smaller screens */
+  }
+  
+  .header {
+    /* Wrapper only - no padding needed */
+    margin: 15px auto;
+  }
+  
+  .nav-container {
+    padding: 10px 14px;
+    border-radius: 35px;
+    min-height: 45px;
+    max-width: calc(100% - 16px);
+  }
+  
+  .nav-link {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
 }
 
-/* AI Center Label */
-.ai-label {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.9);
-  color: white;
-  padding: 8px 16px;
-  border-radius: var(--border-radius);
-  font-size: var(--font-size-sm);
-  font-weight: 700;
-  white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 25;
-  margin-top: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+/* ===== RESPONSIVE DESIGN FOR TECH STACK ===== */
+@media (max-width: 768px) {
+  .tech-stack .section-title {
+    font-size: 2.5rem;
+  }
+  
+  .tech-stack .section-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .tech-badges {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    padding: 0 1.5rem;
+  }
+  
+  .tech-badge {
+    padding: 8px 14px;
+    font-size: 1rem;
+    min-height: 44px;
+    border-radius: 20px;
+  }
 }
 
-/* ===== ORBIT RINGS ===== */
-.orbit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  will-change: transform;
-  transition: animation-play-state 0.3s ease;
-  z-index: 10;
+@media (max-width: 600px) {
+  .tech-stack .section-title {
+    font-size: 2rem;
+  }
+  
+  .tech-stack .section-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .tech-badges {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.8rem;
+    padding: 0 1rem;
+  }
+  
+  .tech-badge {
+    padding: 7px 12px;
+    font-size: 0.95rem;
+    min-height: 40px;
+    border-radius: 18px;
+  }
 }
 
-.orbit:hover {
-  animation-play-state: paused;
-}
-
-.inner-orbit {
-  width: 300px;
-  height: 300px;
-  animation: rotate 60s linear infinite;
-  animation-fill-mode: forwards;
-}
-
-.outer-orbit {
-  width: 500px;
-  height: 500px;
-  animation: rotate 90s linear infinite reverse;
-  animation-fill-mode: forwards;
-}
-
-/* ===== ORBIT PATHS ===== */
-.orbit-path {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px dashed rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.inner-path {
-  width: 300px;
-  height: 300px;
-}
-
-.outer-path {
-  width: 500px;
-  height: 500px;
-}
-
-/* ===== PLANETS ===== */
-.planet {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 40px;
-  height: 40px;
-  background: white;
-  border: 2px solid #333;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 
-    0 4px 16px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
-  opacity: 1;
-  z-index: 15;
-}
-
-.planet.visible {
-  opacity: 1;
-}
-
-.planet:nth-child(1) { animation-delay: 0s; }
-.planet:nth-child(2) { animation-delay: 0.5s; }
-.planet:nth-child(3) { animation-delay: 1s; }
-.planet:nth-child(4) { animation-delay: 1.5s; }
-.planet:nth-child(5) { animation-delay: 2s; }
-.planet:nth-child(6) { animation-delay: 2.5s; }
-.planet:nth-child(7) { animation-delay: 3s; }
-.planet:nth-child(8) { animation-delay: 3.5s; }
-.planet:nth-child(9) { animation-delay: 4s; }
-.planet:nth-child(10) { animation-delay: 4.5s; }
-
-.planet:hover {
-  transform: scale(1.2);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    0 0 0 3px rgba(255, 255, 255, 0.3),
-    0 0 20px rgba(255, 255, 255, 0.2);
-  z-index: 20;
-  animation-play-state: paused;
-}
-
-.planet-icon {
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #333;
-  transition: all 0.3s ease;
-}
-
-.planet-icon svg {
-  width: 14px;
-  height: 14px;
-  transition: all 0.3s ease;
-}
-
-.planet:hover .planet-icon svg {
-  transform: scale(1.2) rotate(5deg);
-}
-
-.planet-name {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.9);
-  color: white;
-  padding: 6px 10px;
-  border-radius: var(--border-radius);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-  white-space: nowrap;
-  opacity: 1;
-  visibility: visible;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 30;
-  margin-top: 8px;
-  max-width: 120px;
-  text-align: center;
-}
-
-.planet:hover .planet-name {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(2px);
-  background: rgba(0, 0, 0, 0.95);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
-}
-
-/* ===== POSITIONING PLANETS - BASIC STRUCTURE ===== */
-/* Inner Ring - 6 planets at 60° intervals (150px radius) */
-.inner-orbit .planet:nth-child(1) { 
-  transform: translate(-50%, -50%) rotate(0deg) translateX(150px) rotate(0deg); 
-}
-
-.inner-orbit .planet:nth-child(2) { 
-  transform: translate(-50%, -50%) rotate(60deg) translateX(150px) rotate(-60deg); 
-}
-
-.inner-orbit .planet:nth-child(3) { 
-  transform: translate(-50%, -50%) rotate(120deg) translateX(150px) rotate(-120deg); 
-}
-
-.inner-orbit .planet:nth-child(4) { 
-  transform: translate(-50%, -50%) rotate(180deg) translateX(150px) rotate(-180deg); 
-}
-
-.inner-orbit .planet:nth-child(5) { 
-  transform: translate(-50%, -50%) rotate(240deg) translateX(150px) rotate(-240deg); 
-}
-
-.inner-orbit .planet:nth-child(6) { 
-  transform: translate(-50%, -50%) rotate(300deg) translateX(150px) rotate(-300deg); 
-}
-
-/* Outer Ring - 8 planets at 45° intervals (250px radius) */
-.outer-orbit .planet:nth-child(1) { 
-  transform: translate(-50%, -50%) rotate(0deg) translateX(250px) rotate(0deg); 
-}
-
-.outer-orbit .planet:nth-child(2) { 
-  transform: translate(-50%, -50%) rotate(45deg) translateX(250px) rotate(-45deg); 
-}
-
-.outer-orbit .planet:nth-child(3) { 
-  transform: translate(-50%, -50%) rotate(90deg) translateX(250px) rotate(-90deg); 
-}
-
-.outer-orbit .planet:nth-child(4) { 
-  transform: translate(-50%, -50%) rotate(135deg) translateX(250px) rotate(-135deg); 
-}
-
-.outer-orbit .planet:nth-child(5) { 
-  transform: translate(-50%, -50%) rotate(180deg) translateX(250px) rotate(-180deg); 
-}
-
-.outer-orbit .planet:nth-child(6) { 
-  transform: translate(-50%, -50%) rotate(225deg) translateX(250px) rotate(-225deg); 
-}
-
-.outer-orbit .planet:nth-child(7) { 
-  transform: translate(-50%, -50%) rotate(270deg) translateX(250px) rotate(-270deg); 
-}
-
-.outer-orbit .planet:nth-child(8) { 
-  transform: translate(-50%, -50%) rotate(315deg) translateX(250px) rotate(-315deg); 
-}
-
-/* Smart Text Rotation - Keep planet names upright */
-.planet-name {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.9);
-  color: white;
-  padding: 6px 10px;
-  border-radius: var(--border-radius);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-  white-space: nowrap;
-  opacity: 1;
-  visibility: visible;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 30;
-  margin-top: 8px;
-  max-width: 120px;
-  text-align: center;
-  /* Smart rotation to keep text upright */
-  transform: translateX(-50%) rotate(calc(var(--planet-angle, 0deg) * -1));
-}
-
-/* Planet angle variables for smart text rotation */
-.inner-orbit .planet:nth-child(1) { --planet-angle: 0deg; }
-.inner-orbit .planet:nth-child(2) { --planet-angle: 60deg; }
-.inner-orbit .planet:nth-child(3) { --planet-angle: 120deg; }
-.inner-orbit .planet:nth-child(4) { --planet-angle: 180deg; }
-.inner-orbit .planet:nth-child(5) { --planet-angle: 240deg; }
-.inner-orbit .planet:nth-child(6) { --planet-angle: 300deg; }
-
-.outer-orbit .planet:nth-child(1) { --planet-angle: 0deg; }
-.outer-orbit .planet:nth-child(2) { --planet-angle: 45deg; }
-.outer-orbit .planet:nth-child(3) { --planet-angle: 90deg; }
-.outer-orbit .planet:nth-child(4) { --planet-angle: 135deg; }
-.outer-orbit .planet:nth-child(5) { --planet-angle: 180deg; }
-.outer-orbit .planet:nth-child(6) { --planet-angle: 225deg; }
-.outer-orbit .planet:nth-child(7) { --planet-angle: 270deg; }
-.outer-orbit .planet:nth-child(8) { --planet-angle: 315deg; }
-
-.planet:hover .planet-name {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(2px);
-  background: rgba(0, 0, 0, 0.95);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
-}
-
-/* ===== ANIMATIONS ===== */
-@keyframes rotate {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-5px); }
+@media (max-width: 480px) {
+  .tech-stack {
+    padding: var(--spacing-2xl) 0;
+  }
+  
+  .tech-stack .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .tech-stack .section-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .tech-badges {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.6rem;
+    padding: 0 0.75rem;
+  }
+  
+  .tech-badge {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    min-height: 36px;
+    border-radius: 16px;
+  }
 }
 
 /* ===== PROJECTS SECTION ===== */
@@ -1615,18 +1367,6 @@ a:hover {
     margin-bottom: var(--spacing-lg);
   }
   
-  .tech-category-header.outer-category {
-    display: none; /* Hide outer category on mobile to avoid clutter */
-  }
-  
-  .category-title {
-    font-size: var(--font-size-lg);
-  }
-  
-  .category-description {
-    font-size: var(--font-size-xs);
-  }
-  
   /* Adjust positioning for mobile orbits */
   .inner-orbit .planet:nth-child(1) { 
     transform: translate(-50%, -50%) rotate(0deg) translateX(90px) rotate(0deg); 
@@ -1676,11 +1416,10 @@ a:hover {
     top: 15px;
     left: 50%;
     transform: translateX(-50%);
-    width: 96%;
+    width: 100%;
     max-width: none;
-    border-radius: 50px;
-    backdrop-filter: blur(15px) saturate(160%);
-    -webkit-backdrop-filter: blur(15px) saturate(160%);
+    margin: 15px auto;
+    /* Keep as wrapper only - NO styling */
   }
   
   .header.header-hidden {
@@ -1689,8 +1428,6 @@ a:hover {
   
   .header:hover {
     transform: translateX(-50%) translateY(-3px);
-    backdrop-filter: blur(18px) saturate(180%);
-    -webkit-backdrop-filter: blur(18px) saturate(180%);
   }
   
   .hero {
@@ -2891,7 +2628,7 @@ a:hover {
   .project-card:hover,
   .timeline-content:hover,
   .stat:hover,
-  .tech-item:hover {
+  .tech-badge:hover {
     transform: none;
   }
   
