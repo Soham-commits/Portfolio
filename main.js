@@ -674,6 +674,8 @@ class InteractiveElements {
     this.setupTechStackInteractions();
     this.setupProjectCardInteractions();
     this.setupButtonEffects();
+    this.setupProjectVideoInteractions();
+    this.setupCollapsibleSections();
   }
 
   setupTechStackInteractions() {
@@ -840,6 +842,134 @@ class InteractiveElements {
       
       button.addEventListener('mouseleave', () => {
         button.style.transform = '';
+      });
+    });
+  }
+
+  setupProjectVideoInteractions() {
+    // Handle both main page and internship page video containers
+    const videoContainers = document.querySelectorAll('.video-container, .internship-card__video-container');
+    
+    videoContainers.forEach(container => {
+      const video = container.querySelector('.demo-video, .internship-card__demo-video');
+      const playButton = container.querySelector('.play-button, .internship-card__play-button');
+      
+      if (!video || !playButton) return;
+      
+      // Debug: Check if video source exists
+      console.log('Video source:', video.querySelector('source')?.src);
+      
+      // Play button click handler
+      playButton.addEventListener('click', () => {
+        console.log('Play button clicked, video paused:', video.paused);
+        if (video.paused) {
+          video.play().then(() => {
+            console.log('Video started playing');
+            playButton.classList.add('playing');
+            playButton.setAttribute('aria-label', playButton.getAttribute('aria-label').replace('Play', 'Pause'));
+          }).catch(error => {
+            console.error('Error playing video:', error);
+          });
+        } else {
+          video.pause();
+          console.log('Video paused');
+          playButton.classList.remove('playing');
+          playButton.setAttribute('aria-label', playButton.getAttribute('aria-label').replace('Pause', 'Play'));
+        }
+      });
+      
+      // Video event handlers
+      video.addEventListener('play', () => {
+        playButton.classList.add('playing');
+        playButton.setAttribute('aria-label', playButton.getAttribute('aria-label').replace('Play', 'Pause'));
+      });
+      
+      video.addEventListener('pause', () => {
+        playButton.classList.remove('playing');
+        playButton.setAttribute('aria-label', playButton.getAttribute('aria-label').replace('Pause', 'Play'));
+      });
+      
+      video.addEventListener('ended', () => {
+        playButton.classList.remove('playing');
+        playButton.setAttribute('aria-label', playButton.getAttribute('aria-label').replace('Pause', 'Play'));
+      });
+      
+      // Pause video when it goes out of viewport
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting && !video.paused) {
+            video.pause();
+            playButton.classList.remove('playing');
+            playButton.setAttribute('aria-label', playButton.getAttribute('aria-label').replace('Pause', 'Play'));
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      observer.observe(container);
+      
+      // Pause video when user scrolls away
+      let scrollTimeout;
+      const handleScroll = () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          if (!video.paused) {
+            video.pause();
+            playButton.classList.remove('playing');
+            playButton.setAttribute('aria-label', playButton.getAttribute('aria-label').replace('Pause', 'Play'));
+          }
+        }, 100);
+      };
+      
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      
+      // Add error handling for video loading
+      video.addEventListener('error', (e) => {
+        console.error('Video loading error:', e);
+        console.error('Video error details:', video.error);
+      });
+      
+      video.addEventListener('loadedmetadata', () => {
+        console.log('Video metadata loaded successfully');
+      });
+    });
+  }
+
+  setupCollapsibleSections() {
+    // Handle both old collapse buttons and new integrated view projects buttons
+    const collapseBtns = document.querySelectorAll('.collapse-btn, .internship-card__projects-btn');
+    
+    collapseBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isActive = btn.classList.contains('active');
+        
+        // Toggle active state
+        btn.classList.toggle('active');
+        
+        // Find the collapse content - could be next sibling or within the same card
+        let collapseContent;
+        if (btn.classList.contains('internship-card__projects-btn')) {
+          // For integrated button, look for projects section within the same card
+          collapseContent = btn.closest('.internship-card').querySelector('.internship-card__projects-section');
+        } else {
+          // For old collapse buttons, look for next sibling
+          collapseContent = btn.nextElementSibling;
+        }
+        
+        if (collapseContent && (collapseContent.classList.contains('collapse') || collapseContent.classList.contains('internship-card__projects-section'))) {
+          if (isActive) {
+            // Hide content
+            collapseContent.style.display = 'none';
+            setTimeout(() => {
+              collapseContent.classList.remove('active');
+            }, 10);
+          } else {
+            // Show content
+            collapseContent.style.display = 'block';
+            setTimeout(() => {
+              collapseContent.classList.add('active');
+            }, 10);
+          }
+        }
       });
     });
   }

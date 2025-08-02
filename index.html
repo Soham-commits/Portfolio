@@ -271,151 +271,99 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="projects section">
+        <section id="projects" class="section projects-section">
             <div class="container">
-                <h2 class="section-title">AI & ML Projects</h2>
+                <h2 class="section-title">My Projects</h2>
                 <div class="projects-grid">
-                    <article class="project-card">
-                        <div class="project-image">
-                            <div class="project-placeholder">🤖</div>
+                    <!-- GPT From Scratch -->
+                    <div class="project-card project-card--white">
+                        <div class="project-header">
+                            <h3 class="project-title">GPT From Scratch</h3>
                         </div>
-                        <div class="project-content">
-                            <h3 class="project-title">Customer Churn Prediction Model</h3>
-                            <p class="project-description">
-                                Built a machine learning model using Random Forest and XGBoost to predict customer churn 
-                                with 85% accuracy. Implemented feature engineering and hyperparameter tuning.
-                            </p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">scikit-learn</span>
-                                <span class="tech-tag">Pandas</span>
-                                <span class="tech-tag">XGBoost</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#" class="project-link">View Project</a>
-                                <a href="#" class="project-link">GitHub</a>
-                            </div>
+                        <p class="project-description">
+                            A ground-up implementation of a Generative Pretrained Transformer with tokenization, attention, and custom training.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">PyTorch</span>
+                            <span class="tech-badge">Transformers</span>
                         </div>
-                    </article>
+                        <div class="project-actions">
+                            <a href="https://github.com/Soham-commits/GPT-From-Scratch-" target="_blank" class="project-button">
+                                <svg class="button-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                                </svg>
+                                <span>See Code</span>
+                            </a>
+                        </div>
+                    </div>
 
-                    <article class="project-card">
-                        <div class="project-image">
-                            <div class="project-placeholder">📊</div>
+                    <!-- Netflix Clone -->
+                    <div class="project-card project-card--black">
+                        <div class="project-header">
+                            <h3 class="project-title">Netflix Clone</h3>
                         </div>
-                        <div class="project-content">
-                            <h3 class="project-title">Sentiment Analysis API</h3>
-                            <p class="project-description">
-                                Developed a real-time sentiment analysis API using BERT transformers. 
-                                Processes text data and provides sentiment scores with confidence levels.
-                            </p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">TensorFlow</span>
-                                <span class="tech-tag">BERT</span>
-                                <span class="tech-tag">FastAPI</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#" class="project-link">View Project</a>
-                                <a href="#" class="project-link">GitHub</a>
-                            </div>
+                        <p class="project-description">
+                            A responsive front-end Netflix UI clone with carousels, hero sections, and hover previews—pure HTML & CSS.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-badge">HTML</span>
+                            <span class="tech-badge">CSS</span>
                         </div>
-                    </article>
+                        <div class="project-actions">
+                            <a href="https://github.com/Soham-commits/Netflix-clone" target="_blank" class="project-button">
+                                <svg class="button-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                                </svg>
+                                <span>See Code</span>
+                            </a>
+                        </div>
+                    </div>
 
-                    <article class="project-card">
-                        <div class="project-image">
-                            <div class="project-placeholder">🖼️</div>
+                    <!-- Zomato Clone -->
+                    <div class="project-card project-card--gray">
+                        <div class="project-header">
+                            <h3 class="project-title">Zomato Clone</h3>
                         </div>
-                        <div class="project-content">
-                            <h3 class="project-title">Image Classification System</h3>
-                            <p class="project-description">
-                                Created a CNN-based image classification system using PyTorch. 
-                                Achieved 92% accuracy on CIFAR-10 dataset with data augmentation techniques.
-                            </p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">PyTorch</span>
-                                <span class="tech-tag">CNN</span>
-                                <span class="tech-tag">OpenCV</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#" class="project-link">View Project</a>
-                                <a href="#" class="project-link">GitHub</a>
-                            </div>
+                        <p class="project-description">
+                            A static web UI inspired by Zomato, built using semantic HTML and modern CSS layouts.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-badge">HTML</span>
+                            <span class="tech-badge">CSS</span>
                         </div>
-                    </article>
+                        <div class="project-actions">
+                            <a href="https://github.com/Soham-commits/Zomato-Clone" target="_blank" class="project-button">
+                                <svg class="button-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                                </svg>
+                                <span>See Code</span>
+                            </a>
+                        </div>
+                    </div>
 
-                    <article class="project-card">
-                        <div class="project-image">
-                            <div class="project-placeholder">📈</div>
+                    <!-- ML Project -->
+                    <div class="project-card project-card--white">
+                        <div class="project-header">
+                            <h3 class="project-title">ML Project</h3>
                         </div>
-                        <div class="project-content">
-                            <h3 class="project-title">Stock Price Prediction</h3>
-                            <p class="project-description">
-                                Built an LSTM neural network for stock price prediction using historical data. 
-                                Implemented time series analysis and achieved 78% directional accuracy.
-                            </p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">TensorFlow</span>
-                                <span class="tech-tag">LSTM</span>
-                                <span class="tech-tag">yfinance</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#" class="project-link">View Project</a>
-                                <a href="#" class="project-link">GitHub</a>
-                            </div>
+                        <p class="project-description">
+                            A complete end-to-end machine learning pipeline from preprocessing to model training and evaluation.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Pandas</span>
+                            <span class="tech-badge">scikit-learn</span>
                         </div>
-                    </article>
-
-                    <article class="project-card">
-                        <div class="project-image">
-                            <div class="project-placeholder">🔍</div>
+                        <div class="project-actions">
+                            <a href="https://github.com/Soham-commits/ML-Project" target="_blank" class="project-button">
+                                <svg class="button-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                                </svg>
+                                <span>See Code</span>
+                            </a>
                         </div>
-                        <div class="project-content">
-                            <h3 class="project-title">Recommendation System</h3>
-                            <p class="project-description">
-                                Developed a collaborative filtering recommendation system using matrix factorization. 
-                                Provides personalized product recommendations based on user behavior.
-                            </p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">NumPy</span>
-                                <span class="tech-tag">scikit-learn</span>
-                                <span class="tech-tag">Flask</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#" class="project-link">View Project</a>
-                                <a href="#" class="project-link">GitHub</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <div class="project-image">
-                            <div class="project-placeholder">🤖</div>
-                        </div>
-                        <div class="project-content">
-                            <h3 class="project-title">Chatbot with OpenAI API</h3>
-                            <p class="project-description">
-                                Created an intelligent chatbot using OpenAI's GPT API. Features context awareness, 
-                                conversation memory, and integration with external data sources.
-                            </p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">OpenAI API</span>
-                                <span class="tech-tag">React</span>
-                                <span class="tech-tag">Node.js</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#" class="project-link">View Project</a>
-                                <a href="#" class="project-link">GitHub</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-
-                <div class="projects-cta">
-                    <a href="internship.html" class="btn btn-primary">View Internship Experience</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -439,11 +387,11 @@
                             </div>
                             <div class="contact-item">
                                 <span class="contact-label">Location:</span>
-                                <span class="contact-text">San Francisco, CA</span>
+                                <span class="contact-text">Pune, Maharashtra, India</span>
                             </div>
                             <div class="contact-item">
                                 <span class="contact-label">Available:</span>
-                                <span class="contact-text">For AI/ML opportunities</span>
+                                <span class="contact-text">For AI opportunities</span>
                             </div>
                         </div>
                     </div>
