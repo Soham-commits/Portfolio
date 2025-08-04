@@ -1212,6 +1212,9 @@ class PortfolioApp {
       this.performanceOptimizer = new PerformanceOptimizer();
       this.mobileOptimizer = new MobileOptimizer();
       
+      // Initialize hero keyword cycling
+      this.initHeroKeywordCycling();
+      
       // Add CSS for keyboard navigation
       this.addKeyboardNavigationStyles();
       
@@ -1219,6 +1222,49 @@ class PortfolioApp {
     } catch (error) {
       console.error('Error initializing portfolio app:', error);
     }
+  }
+
+  initHeroKeywordCycling() {
+    // Simple fade-in animation for centered hero
+    const heroElements = document.querySelectorAll('.hero-name-centered, .hero-title-centered, .hero-accent-line, .hero-cta-buttons');
+    
+    heroElements.forEach((element, index) => {
+      if (element) {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        
+        setTimeout(() => {
+          element.style.transition = 'all 1s ease-out';
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        }, 300 + (index * 200));
+      }
+    });
+    
+    // Add subtle hover effects to buttons
+    this.initializeButtonEffects();
+  }
+
+  initializeButtonEffects() {
+    const ghostButtons = document.querySelectorAll('.btn-outline-ghost');
+    
+    ghostButtons.forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        button.style.transform = 'translateY(-3px) scale(1.05)';
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translateY(0) scale(1)';
+      });
+      
+      button.addEventListener('mousedown', () => {
+        button.style.transform = 'translateY(-1px) scale(1.02)';
+      });
+      
+      button.addEventListener('mouseup', () => {
+        button.style.transform = 'translateY(-3px) scale(1.05)';
+      });
+    });
   }
 
   addKeyboardNavigationStyles() {
