@@ -1081,6 +1081,105 @@ class MobileOptimizer {
 }
 
 // ===== MAIN APPLICATION CLASS =====
+// ===== TERMINAL ANIMATION CLASS =====
+class TerminalAnimation {
+  constructor() {
+    this.bioText = `> Initializing AI Engineer Profile...
+> Loading personality modules...
+> Scanning achievements...
+
+🚀 Passionate AI Engineer with a relentless drive for innovation
+📚 Currently mastering Computer Science at VIT, Vellore
+💡 Built cutting-edge ML models and neural networks from scratch
+🌟 Expertise spans from GPT architectures to computer vision
+⚡ Love turning complex problems into elegant solutions
+🎯 Always pushing the boundaries of what's possible with AI
+
+> Profile loaded successfully!
+> Ready to innovate and create the future 🌟`;
+
+    this.init();
+  }
+
+  init() {
+    this.setupRunButton();
+    this.setupIntersectionObserver();
+  }
+
+  typeText(element, text, speed = 30) {
+    let i = 0;
+    element.innerHTML = '';
+    
+    const type = () => {
+      if (i < text.length) {
+        if (text.charAt(i) === '\n') {
+          element.innerHTML += '<br>';
+        } else {
+          element.innerHTML += text.charAt(i);
+        }
+        i++;
+        setTimeout(type, speed);
+      } else {
+        // Animation complete
+        const cursor = document.getElementById('cursor');
+        if (cursor) {
+          cursor.style.animation = 'blink 1s infinite';
+        }
+      }
+    };
+    
+    type();
+  }
+
+  initTerminalAnimation() {
+    const typingElement = document.getElementById('typing-text');
+    const cursor = document.getElementById('cursor');
+    
+    if (typingElement && cursor) {
+      // Stop cursor blinking during typing
+      cursor.style.animation = 'none';
+      cursor.style.opacity = '1';
+      
+      // Start typing animation
+      this.typeText(typingElement, this.bioText, 40);
+    }
+  }
+
+  setupRunButton() {
+    const runBtn = document.getElementById('runAnimation');
+    if (runBtn) {
+      runBtn.addEventListener('click', () => {
+        this.initTerminalAnimation();
+      });
+    }
+  }
+
+  setupIntersectionObserver() {
+    const observerOptions = {
+      threshold: 0.3,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const terminalObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Add a small delay for dramatic effect
+          setTimeout(() => {
+            this.initTerminalAnimation();
+          }, 500);
+          terminalObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const terminal = document.querySelector('.ai-log-container');
+    if (terminal) {
+      terminalObserver.observe(terminal);
+    }
+  }
+}
+
+// ===== PORTFOLIO APP CLASS =====
 class PortfolioApp {
   constructor() {
     this.navigation = null;
@@ -1089,6 +1188,7 @@ class PortfolioApp {
     this.interactiveElements = null;
     this.performanceOptimizer = null;
     this.mobileOptimizer = null;
+    this.terminalAnimation = null;
     
     this.init();
   }
