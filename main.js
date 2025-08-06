@@ -816,6 +816,7 @@ class InteractiveElements {
   }
 
   setupButtonEffects() {
+    // General button effects
     document.querySelectorAll('.btn').forEach(button => {
       button.addEventListener('mousedown', () => {
         button.style.transform = 'scale(0.95)';
@@ -827,6 +828,35 @@ class InteractiveElements {
       
       button.addEventListener('mouseleave', () => {
         button.style.transform = '';
+      });
+    });
+
+    // Enhanced hover effects for project buttons (modern premium style)
+    document.querySelectorAll('.project-button').forEach(button => {
+      // Add subtle right arrow animation on hover
+      const buttonText = button.querySelector('span') || button;
+      const originalText = buttonText.textContent;
+      
+      button.addEventListener('mouseenter', () => {
+        button.style.transform = 'translateY(-3px) scale(1.05)';
+        // Add right arrow animation
+        if (!buttonText.textContent.includes('→')) {
+          buttonText.textContent = originalText + ' →';
+        }
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translateY(0) scale(1)';
+        // Remove right arrow
+        buttonText.textContent = originalText;
+      });
+      
+      button.addEventListener('mousedown', () => {
+        button.style.transform = 'translateY(-1px) scale(1.02)';
+      });
+      
+      button.addEventListener('mouseup', () => {
+        button.style.transform = 'translateY(-3px) scale(1.05)';
       });
     });
   }
