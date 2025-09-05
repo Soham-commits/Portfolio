@@ -1110,6 +1110,88 @@ class MobileOptimizer {
   }
 }
 
+/* ===== TIMELINE INTERACTION (lightweight & accessible) ===== */
+function timelineInit() {
+  const items = document.querySelectorAll('.timeline-item');
+  if (!items || !items.length) return;
+
+  const prefersReduced = utils.prefersReducedMotion();
+
+  items.forEach(item => {
+    const node = item.querySelector('.timeline-node');
+    const details = item.querySelector('.timeline-details');
+    if (!node || !details) return;
+
+    // Ensure details start hidden for accessibility
+    if (!details.hasAttribute('hidden')) details.setAttribute('hidden', '');
+
+    node.setAttribute('role', 'button');
+    node.setAttribute('tabindex', '0');
+    node.setAttribute('aria-expanded', 'false');
+
+    function open() {
+      details.classList.add('show');
+      details.removeAttribute('hidden');
+      node.setAttribute('aria-expanded', 'true');
+    }
+
+    function close() {
+      details.classList.remove('show');
+      if (!prefersReduced) {
+        setTimeout(() => details.setAttribute('hidden', ''), 320);
+      } else {
+        details.setAttribute('hidden', '');
+      }
+      node.setAttribute('aria-expanded', 'false');
+    }
+
+    node.addEventListener('click', () => {
+      const expanded = node.getAttribute('aria-expanded') === 'true';
+      if (expanded) close(); else open();
+    });
+
+    node.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        node.click();
+      }
+      if (e.key === 'Escape') {
+        close();
+        node.focus();
+      }
+    });
+  });
+}
+
+/* ===== HORIZONTAL TIMELINE NAVIGATION ===== */
+function horizontalTimelineInit(){
+  const track = document.querySelector('.htl-track');
+  const btnLeft = document.querySelector('.htl-nav-left');
+  const btnRight = document.querySelector('.htl-nav-right');
+  if(!track) return;
+
+  const scrollAmount = 300; // px per nav click
+  btnLeft?.addEventListener('click', ()=> track.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
+  btnRight?.addEventListener('click', ()=> track.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
+
+  // Keyboard: left/right arrows when track focused
+  track.addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowRight') { e.preventDefault(); track.scrollBy({ left: scrollAmount, behavior: 'smooth' }); }
+    if(e.key === 'ArrowLeft') { e.preventDefault(); track.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); }
+  });
+
+  // Simple touch swipe handling
+  let startX = 0;
+  track.addEventListener('touchstart', (e)=> { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', (e)=>{
+    const endX = e.changedTouches[0].clientX;
+    const dx = startX - endX;
+    if(Math.abs(dx) > 40) {
+      track.scrollBy({ left: dx > 0 ? scrollAmount : -scrollAmount, behavior: 'smooth' });
+    }
+  });
+}
+
 // ===== MAIN APPLICATION CLASS =====
 // ===== TERMINAL ANIMATION CLASS =====
 class TerminalAnimation {
@@ -1241,6 +1323,10 @@ class PortfolioApp {
       this.interactiveElements = new InteractiveElements();
       this.performanceOptimizer = new PerformanceOptimizer();
       this.mobileOptimizer = new MobileOptimizer();
+  // Initialize timeline interactions
+  timelineInit();
+  // Initialize horizontal timeline navigation (if present)
+  try { horizontalTimelineInit(); } catch (e) { /* optional */ }
       
       // Initialize hero keyword cycling
       this.initHeroKeywordCycling();
