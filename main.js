@@ -67,6 +67,7 @@ class Navigation {
     this.header = document.querySelector('.header');
     this.navToggle = document.querySelector('.nav-toggle');
     this.navMenu = document.querySelector('.nav-menu');
+  this.mobileDropdown = document.getElementById('mobile-dropdown');
     this.navLinks = document.querySelectorAll('.nav-link');
     this.sections = document.querySelectorAll('section[id]');
     this.scrollToTopBtn = this.createScrollToTopButton();
@@ -88,6 +89,13 @@ class Navigation {
   bindEvents() {
     // Mobile menu toggle
     this.navToggle.addEventListener('click', () => this.toggleMobileMenu());
+    // Keyboard activation for accessibility (Enter / Space)
+    this.navToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.toggleMobileMenu();
+      }
+    });
     
     // Smooth scrolling for nav links
     this.navLinks.forEach(link => {
@@ -108,11 +116,20 @@ class Navigation {
   toggleMobileMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.navToggle.classList.toggle('active', this.isMenuOpen);
-    this.navMenu.classList.toggle('active', this.isMenuOpen);
+    if (this.mobileDropdown) {
+      this.mobileDropdown.classList.toggle('open', this.isMenuOpen);
+    } else {
+      this.navMenu.classList.toggle('active', this.isMenuOpen);
+    }
+  // Update ARIA for assistive tech
+  try { this.navToggle.setAttribute('aria-expanded', String(this.isMenuOpen)); } catch (e) {}
+  try { this.navMenu.setAttribute('aria-hidden', String(!this.isMenuOpen)); } catch (e) {}
     
     // Focus management for accessibility
     if (this.isMenuOpen) {
-      this.navMenu.querySelector('.nav-link').focus();
+      // focus the first nav item inside the dropdown for accessibility
+      const first = (this.mobileDropdown || this.navMenu).querySelector('.nav-link');
+      first?.focus();
     }
     
     // Prevent body scroll when menu is open
