@@ -1981,6 +1981,22 @@ a:hover {
   } 
 }
 
+/* Avatar image and fallback initials */
+.about-avatar-wrapper { display:flex; align-items:center; justify-content:center; padding: 0.5rem; }
+.about-avatar { position: relative; width: 220px; height: 220px; border-radius: 50%; overflow: hidden; display:flex; align-items:center; justify-content:center; background: linear-gradient(145deg, #0a0a0a, #151515); border: 4px solid rgba(255,255,255,0.14); padding: 6px; box-shadow: 0 12px 40px rgba(0,0,0,0.7); }
+.about-avatar-img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; }
+.avatar-initials { position: absolute; font-size: 2.4rem; font-weight: 700; color: #fff; letter-spacing: 2px; }
+
+@media (max-width: 900px) {
+  .about-avatar { width: 180px; height: 180px; }
+  .avatar-initials { font-size: 2rem; }
+}
+
+@media (max-width: 600px) {
+  .about-avatar { width: 150px; height: 150px; }
+  .avatar-initials { font-size: 1.6rem; }
+}
+
 @media (max-width: 600px) {
   .split-hero .about-hero-grid {
     gap: 2.5rem;
