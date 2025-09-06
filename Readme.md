@@ -1,7 +1,7 @@
 # Soham Nigam's Portfolio
 
 Welcome to my personal portfolio repository!  
-Visit the live site: [soham-nigam-portfolio.netlify.app](https://soham-nigam-portfolio.netlify.app)
+
 
 ---
 
