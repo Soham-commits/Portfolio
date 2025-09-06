@@ -24,25 +24,27 @@
   <header class="header">
     <nav class="nav">
       <div class="nav-container">
-        <!-- Mobile dropdown wrapper; JS will toggle the .open class -->
-        <div class="mobile-dropdown" id="mobile-dropdown">
-          <ul id="main-nav" class="nav-menu">
-            <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="#about-hero" class="nav-link active">About</a></li>
-            <li class="nav-item"><a href="index.html#projects" class="nav-link">Projects</a></li>
-            <li class="nav-item"><a href="index.html#tech-stack" class="nav-link">Tech Stack</a></li>
-            <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
-            <li class="nav-item"><a href="internship.html" class="nav-link">Internship</a></li>
-          </ul>
-        </div>
-        <!-- Site logo / brand (mobile: right-aligned) -->
-        <a href="index.html" class="nav-brand" aria-label="Homepage">
-          <!-- Use a small PNG/SVG if available; fallback to initials -->
-          <img src="assets/logo-small.png" alt="Soham Nigam logo" onerror="this.style.display='none'" />
-          <span class="nav-brand-text">SN</span>
-        </a>
-
-        <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0" aria-expanded="false" aria-controls="main-nav">
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="#home" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#tech-stack" class="nav-link">Tech Stack</a>
+          </li>
+          <li class="nav-item">
+            <a href="#projects" class="nav-link">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a href="internship.html" class="nav-link"></a>
+          </li>
+        </ul>
+        <div class="nav-toggle">
           <span class="hamburger"></span>
           <span class="hamburger"></span>
           <span class="hamburger"></span>
