@@ -972,34 +972,31 @@ class InteractiveElements {
     
     collapseBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        const isActive = btn.classList.contains('active');
-        
-        // Toggle active state
+        const wasActive = btn.classList.contains('active');
+        const willBeActive = !wasActive;
         btn.classList.toggle('active');
-        
-        // Find the collapse content - could be next sibling or within the same card
+        btn.setAttribute('aria-expanded', String(willBeActive));
+
         let collapseContent;
         if (btn.classList.contains('internship-card__projects-btn')) {
-          // For integrated button, look for projects section within the same card
-          collapseContent = btn.closest('.internship-card').querySelector('.internship-card__projects-section');
+          collapseContent = btn.closest('.internship-card')?.querySelector('.internship-card__projects-section');
         } else {
-          // For old collapse buttons, look for next sibling
           collapseContent = btn.nextElementSibling;
         }
-        
+
         if (collapseContent && (collapseContent.classList.contains('collapse') || collapseContent.classList.contains('internship-card__projects-section'))) {
-          if (isActive) {
-            // Hide content
-            collapseContent.style.display = 'none';
-            setTimeout(() => {
-              collapseContent.classList.remove('active');
-            }, 10);
-          } else {
-            // Show content
+          if (willBeActive) {
             collapseContent.style.display = 'block';
+            collapseContent.setAttribute('aria-hidden', 'false');
             setTimeout(() => {
               collapseContent.classList.add('active');
-            }, 10);
+            }, 16);
+          } else {
+            collapseContent.classList.remove('active');
+            collapseContent.setAttribute('aria-hidden', 'true');
+            setTimeout(() => {
+              collapseContent.style.display = 'none';
+            }, 320);
           }
         }
       });
