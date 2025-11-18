@@ -1,9 +1,6 @@
 
-# Ignore Assets folder entirely, but allow specific tracked files (avatar, resume)
-Assets/*
-
-# Allow tracking of specific assets used by the site
-!Assets/IMG_3993.jpg
-!Assets/Resume(latest).pdf
+# Assets/*
+# !Assets/IMG_3993.jpg
+# !Assets/Resume(latest).pdf
 
 
