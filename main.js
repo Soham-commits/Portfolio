@@ -137,15 +137,14 @@ class Navigation {
   }
 
   handleNavClick(e) {
-    e.preventDefault();
     const href = e.currentTarget.getAttribute('href');
     
     // Handle external links (like internship.html)
-    if (href.includes('.html')) {
-      window.location.href = href;
+    if (href.includes('.html') || !href.startsWith('#')) {
       return;
     }
     
+    e.preventDefault();
     const targetId = href.substring(1);
     const targetSection = document.getElementById(targetId);
     
