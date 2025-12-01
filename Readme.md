@@ -14,7 +14,7 @@ Built with **HTML**, **CSS**, and **JavaScript**, it offers a responsive and eng
 
 ## 🖥️ Live Preview
 
-🌐 **[Check it out here!]()**
+🌐 **[Check it out here!](https://soham-commits.netlify.app)**
 
 ---
 
